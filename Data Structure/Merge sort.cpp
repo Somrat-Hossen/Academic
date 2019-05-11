@@ -1,93 +1,74 @@
 #include<bits/stdc++.h>
+#define mx 1000000
 using namespace std;
 
-int arr[10000],tmp[10000];
-int n;
 
 void Merge(int arr[],int l,int mid,int r)
 {
-   int i,j,k;
-   int len1=mid-l+1;
-   int  len2=r-mid;
-
-   int left[len1],right[len2];
-
-   /// store in the left and right array.
-   for(i=0;i<len1;i++)
-   {
-     left[i]=arr[i+l];
-   }
-
-   for(i=0;i<len2;i++)
-   {
-      right[i]=arr[mid+1+i];
-   }
+  cout<<l<<" "<<r<<" "<<mid<<endl;
+   int i,j,k,index=0;
+   int tmp[mx];
 
    /* Merge the temp arrays back into arr[l..r]*/
-    i = 0; // Initial index of first subarray
-    j = 0; // Initial index of second subarray
-    k = l; // Initial index of merged subarray
-    while (i < len1 && j <len2)
+    i = l; // Initial index of first subarray
+    j = mid+1; // Initial index of second subarray
+    while (i <=mid && j <=r)
     {
-        if (left[i] <= right[j])
+        if (arr[i] <= arr[j])
         {
-            arr[k] = left[i];
+            tmp[index] = arr[i];
             i++;
         }
         else
         {
-            arr[k] = right[j];
+            tmp[index] = arr[j];
             j++;
         }
-        k++; ///for both condition
+        index++; ///for both condition
     }
 
-    /* Copy the remaining elements of L[], if there
-       are any */
-    while (i < len1)
+    /// Copy the remaining elements of Left arr, if thereare any
+    while (i <=mid)
     {
-        arr[k] = left[i];
+        tmp[index] = arr[i];
         i++;
-        k++;
+        index++;
     }
 
-    /* Copy the remaining elements of R[], if there
-       are any */
-    while (j < len2)
+    /// Copy the remaining elements of right arr, if thereare any
+    while (j <=r)
     {
-        arr[k] = right[j];
+        tmp[index] = arr[j];
         j++;
-        k++;
+        index++;
+    }
+
+    for(i=l,k=0;i<=r;i++,k++)
+    {
+       arr[i]=tmp[k];
     }
 }
 
-void Merge_sort( int lb, int ub)
+void Merge_sort(int arr[], int lb, int ub)
 {
    if(lb>=ub) return;
    int mid=(lb+ub)/2;
 
-   Merge_sort(lb,mid);///leftpart
-   Merge_sort(mid+1,ub);///right part
+   Merge_sort(arr,lb,mid);///leftpart
+   Merge_sort(arr,mid+1,ub);///right part
 
    Merge(arr,lb,mid,ub);  ///call the merge function
 }
 
 
 
-
-
-
-
-
 int main()
 {
-   freopen("in.txt","r",stdin);
 
-   cin>>n;
+   int arr[]={8,15,42,79,86,121,5};
+   int n=sizeof arr/sizeof arr[0];
 
-   for(int i=0;i<n;i++) cin>>arr[i];
-
-   Merge_sort(0,n-1);
+   Merge_sort(arr,0,n-1);
 
    for(int i=0;i<n;i++) cout<<arr[i]<<" ";
 
