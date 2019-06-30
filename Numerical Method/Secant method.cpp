@@ -5,46 +5,43 @@ class Secant
 {
   double x;
   double error=0.00001;
-  int mx_iteration=10,i=1;
+  int mx_iteration=100;
 
   public:
   double Compute(double x)
   {
-     return(x*x-4*x-10);
+     return double( (x*x)-(4*x)-10);
   }
 
-  double Find_root(double x1,double x2)
+  void Function(double x1,double x2)
   {
-    cout<<"Iteration     x1   x2    x"<<endl;
+     if( Compute(x1)==Compute(x2) )
+     {
+       puts("The roots not lies between the given interval:");
+       return;
+     }
+     cout<<"Iteration     x1   x2    x    Compute(x1)    Compute(x2) "<<endl;
 
-     while(i<=mx_iteration)
+     for(int i=1;i<=mx_iteration;i++)
      {
         x=(x1*Compute(x2)-x2*Compute(x1))/(Compute(x2)-Compute(x1));
 
-        if(Compute(x)==0 || Compute(x)<=error ) break;
         x1=x2;
         x2=x;
         cout<<"  "<<i<<"         "<<x1<<"        "<<x2<<"   "<<x<<  "   "<<Compute(x1)<<"   "<<Compute(x2) <<endl;
-        i++;
+        if(Compute(x)==fabs(0.0) || (fabs(Compute(x))<=error) ) break;
     }
-    cout<<"The root is:"<<x<<endl;
+    cout<<"The root is:  "<<fixed<<setprecision(4)<<x<<endl;
   }
 };
 
 
 int main()
 {
-   double x1=10,x2=9;
+   double x1=4,x2=2;
    Secant ob;
 
-   if(ob.Compute(x1)==ob.Compute(x2))
-   {
-      cout<<"Root is not possible:"<<endl;
-   }
-   else
-   {
-      ob.Find_root(x1,x2);
-   }
+  ob.Function(x1,x2);
 
   return 0;
 }
