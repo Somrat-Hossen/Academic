@@ -94,7 +94,7 @@ int main()
 {
   	int i, j;
 
-  	freopen("in.txt","r",stdin);
+  	///freopen("in.txt","r",stdin);
   	cin>>n;
 
   	for (i=0;i<n;++i)
