@@ -43,18 +43,19 @@ void Compute(int n,double a)
 
 int main()
 {
-  
-    freopen("in.txt","r",stdin);
+
+   /// freopen("in.txt","r",stdin);
     int n,i,j;
     double a;
 
-
+   puts("Give the number of point: with their functional value");
     cin>>n;
     for(i=0;i<n;i++)
     {
      cin>>arr[i].x>>arr[i].y;
     }
 
+    puts("Give the point to find the value");
     cin>>a;
    /* for(i=0;i<n;i++)
     {
@@ -66,4 +67,3 @@ int main()
 
     return 0;
 }
-
