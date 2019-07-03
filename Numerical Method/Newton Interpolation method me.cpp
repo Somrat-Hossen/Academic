@@ -1,35 +1,67 @@
 /***************** Newtons interpolation **************/
 #include<bits/stdc++.h>
+#define mx 1000
 using namespace std;
 
-int main()
+
+class data
 {
-    int n,i,j;
-    float x[10],f[10],a,sum=0,mult;
+   public:
+   double x,y;
 
-    cout<<"No of sample points ? ";
-    cin>>n;
-    cout<<"\nAll x with corresponding f(x) ";
-    for(i=0;i<n;i++)
-    cin>>x[i]>>f[i];
-    cout<<"\nEnter x for calculation ";
-    cin>>a;
+}arr[mx];
 
-    for(j=0;j<n-1;j++)
+
+void Compute(int n,double a)
+{
+     double sum=0,mult;
+     int i,j;
+
+    for(j=0;j<n-1;j++)///find a0,a1,a2
     {
         for(i=n-1;i>j;i--)
-            f[i]=(f[i]-f[i-1])/(x[i]-x[i-j-1]);
+        {
+            arr[i].y =( (arr[i].y)- (arr[i-1].y))/( (arr[i].x)-(arr[i-j-1].x ));
+        }
     }
-    for(i=n-1;i>=0;i--)
+
+    for(i=n-1;i>=0;i--) //multiply and sum
     {
         mult=1;
         for(j=0;j<i;j++)
-            mult*=(a-x[j]);
+        {
+            mult*=(a-arr[j].x);
 
-        mult*=f[j];
+        }
+
+        mult*=arr[j].y;
         sum+=mult;
     }
-    cout<<"The result is: "<<sum;
+    cout<<"The result is: "<<setprecision(6)<<sum;
+}
+
+
+int main()
+{
+  
+    freopen("in.txt","r",stdin);
+    int n,i,j;
+    double a;
+
+
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+     cin>>arr[i].x>>arr[i].y;
+    }
+
+    cin>>a;
+   /* for(i=0;i<n;i++)
+    {
+     cout<<arr[i].x<<" "<<arr[i].y<<endl;
+    }*/
+
+     Compute(n,a);
 
 
     return 0;
