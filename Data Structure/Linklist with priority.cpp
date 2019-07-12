@@ -51,8 +51,8 @@ public:
 
       else
 	  {
-		 //make a copy of root node
-		while((current_node->next!=NULL) && (pr >current_node->next->priority) ) //Find the last node
+	        /// Since i compare with first node before , so i run loop using next(current_node->next->priority)
+		while((current_node->next!=NULL) && (pr >current_node->next->priority) ) //Find the exact position 
 		{
 		    //if(pr< current_node->next->priority) break;
 
