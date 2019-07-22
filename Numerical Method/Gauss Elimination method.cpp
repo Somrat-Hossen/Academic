@@ -72,7 +72,7 @@ void gauss_solve()
     for(i=n-2; i>=0; i--)
     {
         sum=0;
-        for(j=i+1;j<=n;j++)
+        for(j=i+1;j<n;j++)
         {
             sum=sum+matrix[i][j]*res[j];
         }
