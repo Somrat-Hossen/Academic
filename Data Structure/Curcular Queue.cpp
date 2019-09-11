@@ -46,7 +46,7 @@ class Queue
 
       if(Front==Rear)   ///means one element
       {
-         Front=Rear=0;
+         Front=Rear=-1;
       }
 
       else
