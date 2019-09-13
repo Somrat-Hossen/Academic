@@ -59,7 +59,8 @@ public:
 			current_node=current_node->next; //go to next address
 		}
 
-		new_node->next=current_node->next;
+		//new_node->next=current_node->next;
+	         new_node->next=nullptr;
 		current_node->next=new_node; //link the last node with new node
 	  }
  }
